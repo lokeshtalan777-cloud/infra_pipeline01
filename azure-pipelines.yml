@@ -28,8 +28,10 @@ stages:
               backendAzureRmStorageAccountName: "ramesh1212"
               backendAzureRmContainerName: "rakesh1213"
               backendAzureRmKey: "rd.tfstate"
-            - task: TerraformTask@5
-              inputs:
-                provider: 'azurerm'
-                command: 'apply'
-                environmentServiceNameAzureRM: 'Service Connection Shiv'
+
+          - task: TerraformTask@5
+            displayName: "Terraform Apply"
+            inputs:
+              provider: "azurerm"
+              command: "apply"
+              environmentServiceNameAzureRM: "Service Connection Shiv"
