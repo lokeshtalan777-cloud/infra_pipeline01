@@ -3,17 +3,17 @@ trigger:
     include:
       - main
 
-pool: Shivg19
+pool:
+  name: "Rovin kumar"
 
 stages:
   - stage: Terraform
-    displayName: "Terraform Stage"
-
+    displayName: "Terraform RG"
     jobs:
       - job: TerraformJob
         displayName: "Terraform Init Plan Apply"
-
         steps:
+
           - task: TerraformInstaller@1
             displayName: "Install Terraform"
             inputs:
@@ -24,14 +24,14 @@ stages:
             inputs:
               provider: "azurerm"
               command: "init"
-              backendServiceArm: "Service Connection Shiv"
-              backendAzureRmStorageAccountName: "ramesh1212"
-              backendAzureRmContainerName: "rakesh1213"
-              backendAzureRmKey: "rd.tfstate"
+              backendServiceArm: "yaml"
+              backendAzureRmStorageAccountName: "rovin12"
+              backendAzureRmContainerName: "deepanshu"
+              backendAzureRmKey: "terraform.tfstate"
 
           - task: TerraformTask@5
             displayName: "Terraform Apply"
             inputs:
               provider: "azurerm"
               command: "apply"
-              environmentServiceNameAzureRM: "Service Connection Shiv"
+              environmentServiceNameAzureRM: "yaml"
