@@ -23,3 +23,25 @@ stages:
               backendAzureRmStorageAccountName: 'arun1234'
               backendAzureRmContainerName: 'lokesh'
               backendAzureRmKey: 'terraform.tfstate'
+          
+  - stage: Apply
+    displayName: Apply
+    jobs:
+      - job: terraformapply
+        displayName: Terraform apply
+        steps:
+          - task: TerraformTask@5
+            displayName: Terraform Init
+            inputs:
+              provider: azurerm
+              command: init
+              backendServiceArm: 'Service Connection'
+              backendAzureRmStorageAccountName: 'arun1234'
+              backendAzureRmContainerName: 'lokesh'
+              backendAzureRmKey: 'terraform.tfstate'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'Service Connection'
+            
