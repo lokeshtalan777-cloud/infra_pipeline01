@@ -1,37 +1,25 @@
-trigger:
-  branches:
-    include:
-      - main
+pool: Priyanshi
 
-pool:
-  name: "Rovin kumar"
+trigger:
+-main
+-feature/*
 
 stages:
-  - stage: Terraform
-    displayName: "Terraform RG"
-    jobs:
-      - job: TerraformJob
-        displayName: "Terraform Init Plan Apply"
-        steps:
 
-          - task: TerraformInstaller@1
-            displayName: "Install Terraform"
-            inputs:
-              terraformVersion: "latest"
+- stage: plan
+  displayName: Plan
+  jobs:
+    - job: 
+      steps:
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'Service Connection'
+          backendAzureRmStorageAccountName: 'arun1234'
+          backendAzureRmContainerName: 'lokesh'
+          backendAzureRmKey: 'terraform.tfstate'
+      
+      
 
-          - task: TerraformTask@5
-            displayName: "Terraform Init"
-            inputs:
-              provider: "azurerm"
-              command: "init"
-              backendServiceArm: "yaml"
-              backendAzureRmStorageAccountName: "rovin12"
-              backendAzureRmContainerName: "deepanshu"
-              backendAzureRmKey: "terraform.tfstate"
-
-          - task: TerraformTask@5
-            displayName: "Terraform Apply"
-            inputs:
-              provider: "azurerm"
-              command: "apply"
-              environmentServiceNameAzureRM: "yaml"
+      
